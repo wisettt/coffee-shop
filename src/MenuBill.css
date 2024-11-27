@@ -1,0 +1,96 @@
+.menu-bill {
+    font-family: "Arial", sans-serif;
+    background-color: #fffbea;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bill-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: #fef7e5;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .back-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #333;
+    margin-right: 8px;
+  }
+  
+  .bill-header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .bill-items {
+    flex-grow: 1;
+    padding: 16px;
+    overflow-y: auto;
+  }
+  
+  .bill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .item-quantity {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+    margin-left: 8px;
+  }
+  
+  .item-name {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .item-note {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .item-price {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .bill-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #fef7e5;
+  }
+  
+  .continue-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .continue-button:hover {
+    background-color: #c0392b;
+  }
+  

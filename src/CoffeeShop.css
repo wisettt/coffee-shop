@@ -1,0 +1,177 @@
+/* สไตล์หลัก */
+.coffeeShop {
+  font-family: Arial, sans-serif;
+  background-color: #f9f6e6;
+  padding: 20px;
+  min-height: 100vh; /* ให้ครอบคลุมเต็มหน้าจอ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ส่วนหัว */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #8B5E3C;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ชื่อร้าน */
+.title {
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* เมนู */
+.menu {
+  padding: 1rem;
+  width: 100%;
+}
+
+.menuTitle {
+  color: #8B5E3C;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* การจัดเรียงเมนู */
+.menuItems {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* สไตล์ของแต่ละเมนู */
+.menu-item {
+  width: 180px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: scale(1.05);
+}
+
+/* รูปภาพในเมนู */
+.menu-item-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+/* รายละเอียดเมนู */
+.menu-item-details {
+  padding: 0.5rem;
+}
+
+.menu-item-name {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.menu-item-price {
+  color: #8B5E3C;
+  font-size: 1.2rem;
+}
+
+/* วงกลมลิงก์ */
+.circle1, .circle2 {
+  position: fixed;
+  top: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.circle1 {
+  right: 80px;
+  width: 50px;
+  height: 50px;
+}
+
+.circle2 {
+  right: 140px;
+  width: 50px;
+  height: 50px;
+}
+
+/* การแสดงกล่องเมนู */
+.boxContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* สไตล์สำหรับจอเล็ก */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .menu-item {
+    width: 120px;
+  }
+
+  .menu-item-image {
+    height: 120px;
+  }
+
+  .menuTitle {
+    font-size: 1.5rem;
+  }
+
+  .circle1, .circle2 {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+  }
+}
+
+/* สไตล์สำหรับจอใหญ่ */
+@media (min-width: 769px) {
+  .header {
+    flex-direction: row;
+  }
+
+  .menu-item {
+    width: 200px;
+  }
+
+  .menu-item-image {
+    height: 220px;
+  }
+
+  .menuTitle {
+    font-size: 2.2rem;
+  }
+
+  .circle1, .circle2 {
+    width: 60px;
+    height: 60px;
+  }
+}
