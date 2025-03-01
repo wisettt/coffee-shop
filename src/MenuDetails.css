@@ -1,0 +1,90 @@
+.menu-details {
+  font-family: 'Prompt', sans-serif;
+  background-color: #fffbea; /* พื้นหลังโทนครีม */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.menu-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0e6d6;
+  padding-bottom: 10px;
+}
+
+.menu-details-header .back-button {
+  background-color: #e5d4c0;
+  border: none;
+  color: #5c4530;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.menu-details-header .back-button:hover {
+  transform: scale(1.1);
+  background-color: #d3b89b; /* สี hover */
+}
+
+.menu-details-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-details-image {
+  max-width: 100%;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-details-info {
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.menu-details-info p {
+  font-size: 18px;
+  color: #4a302a;
+  margin: 8px 0;
+}
+
+.add-to-cart-button {
+  background-color: #a07855;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #8b5e3c;
+  transform: translateY(-2px);
+}
+
+.menu-details-loading,
+.menu-details-error {
+  font-size: 20px;
+  color: #8b5e3c;
+  text-align: center;
+  margin: 20px;
+}

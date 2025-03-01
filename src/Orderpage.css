@@ -1,84 +1,171 @@
-/* Cart.css */
-.Orderpage {
+/* ✅ ปรับขนาดของตะกร้าให้พอดี */
+.cart {
   width: 90%;
-  max-width: 400px;
-  background-color: #fff;
+  max-width: 420px;
+  background-color: #fff8e6;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ✅ หัวข้อใหญ่ขึ้น และชัดขึ้น */
 .cart-header {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #5c4530;
+  text-align: center;
+  border-bottom: 2px solid #f0e6d6;
+  padding-bottom: 8px;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #f0e6d6;
+  position: relative;
 }
 
+/* ✅ รูปสินค้าชัดขึ้น แต่ไม่กินที่เกินไป */
 .item-image {
   width: 50px;
   height: 50px;
-  border-radius: 5px;
-  margin-right: 10px;
+  border-radius: 10px;
+  margin-right: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
 .item-details {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .item-name {
-  font-size: 16px;
-  color: #333;
+  font-size: 17px;
+  font-weight: bold;
+  color: #4a302a;
+  margin-bottom: 3px;
 }
 
 .item-price {
   font-size: 16px;
-  color: #888;
+  font-weight: bold;
+  color: #8b6b51;
 }
 
+/* ✅ ปรับขนาดปุ่มลบ ❌ ให้เล็กลง แต่ยังคลิกง่าย */
+.remove-button {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(145deg, #ff7b7b, #e85a5a);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.remove-button:hover {
+  background: linear-gradient(145deg, #ff5c5c, #e63939);
+  transform: scale(1.1);
+}
+
+/* ✅ ปรับขนาดปุ่ม + - และตัวเลข ให้ดูดีขึ้น */
 .quantity {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
 }
 
 .quantity-button {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   font-size: 18px;
-  background-color: #f6f3e7;
+  background: linear-gradient(145deg, #f8d3a6, #f0c087);
   border: none;
-  color: #333;
+  color: #5c4530;
   cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.quantity-value {
-  font-size: 16px;
-  color: #333;
+.quantity-button:hover {
+  background: linear-gradient(145deg, #f5b976, #f2a060);
+  transform: scale(1.1);
+}
+
+/* ✅ ช่องตัวเลขเล็กลง แต่ดูเรียบร้อย */
+.quantity-input {
+  width: 45px;
+  height: 35px;
+  text-align: center;
+  font-size: 18px;
+  color: #5c4530;
+  border: 2px solid #e0c3a2;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.quantity-input:focus {
+  box-shadow: 0 0 5px rgba(240, 173, 78, 0.7);
+}
+
+/* ✅ สรุปยอดรวมใหญ่ขึ้น ดูเด่นขึ้น */
+.cart-footer {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 2px solid #f0e6d6;
+  text-align: center;
 }
 
 .total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5c4530;
   display: flex;
   justify-content: space-between;
-  padding: 15px 0;
-  border-top: 1px solid #e0e0e0;
-  font-size: 16px;
-  color: #333;
+  margin-bottom: 12px;
 }
 
+/* ✅ ปุ่มสั่งซื้อกว้างขึ้น ดูโดดเด่น */
 .checkout-button {
   width: 100%;
-  padding: 10px;
-  background-color: #e53935;
+  padding: 12px;
+  background-color: #a07855;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-button:hover {
+  background-color: #8b5e3c;
+  transform: translateY(-2px);
 }
