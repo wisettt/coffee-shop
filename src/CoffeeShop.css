@@ -1,4 +1,4 @@
-/* รีเซ็ตค่าเริ่มต้น */
+/* ===== รีเซ็ตค่าเริ่มต้น ===== */
 * {
   margin: 0;
   padding: 0;
@@ -7,35 +7,34 @@
 
 body, html {
   font-family: 'Prompt', sans-serif;
-  background-color: #f7f1e3;
-  color: #333;
+  background-color: #f3e5d1;
+  color: #4a302a;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   scroll-behavior: smooth;
 }
 
-/* พื้นหลังหลัก */
+/* ===== พื้นหลังหลักของร้านกาแฟ ===== */
 .coffee-shop {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #d3b89b, #f7f1e3);
-  color: #333;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f5e6ca, #f3e5d1); /* ไล่ระดับสีเหลืองทองอ่อน */
   padding-bottom: 20px;
 }
 
-/* Header */
+/* ===== Header สวย ๆ ===== */
 .header {
   width: 100%;
   padding: 20px;
   text-align: center;
-  background: linear-gradient(to right, #e5d4c0, #d3b89b);
+  background: linear-gradient(to right, #f8d7aa, #e9b885); /* ไล่ระดับสีทอง */
   color: #4a302a;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 15px 15px;
 }
 
 .header-content .title {
@@ -46,7 +45,20 @@ body, html {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Search Bar */
+/* ===== ปรับข้อความ "คุณกำลังอยู่ที่โต๊ะ" ===== */
+.header-content p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6b4f3f;
+  margin-top: 5px;
+}
+
+.header-content strong {
+  color: #4a302a;
+  font-weight: bold;
+}
+
+/* ===== Search Bar ===== */
 .search-bar {
   margin: 1rem 0;
   display: flex;
@@ -81,41 +93,11 @@ body, html {
   font-size: 1.5rem;
 }
 
-/* Navbar */
-.navbar-menu {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 1.5rem 0;
-}
-
-.navbar-link {
-  font-size: 1rem;
-  padding: 12px 30px;
-  border-radius: 25px;
-  background: linear-gradient(to right, #d3b89b, #b08968);
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.navbar-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  background: #a07855;
-}
-
-.navbar-link.active {
-  background: linear-gradient(to right, #a07855, #8b5e3c);
-}
-
-/* Menu Section */
+/* ===== เมนูของร้านกาแฟ ===== */
 .menu {
   width: 100%;
   flex: 1;
-  background-color: #f7f1e3;
+  background-color: #f3e5d1;
   overflow-y: auto;
   padding: 2rem;
   border-radius: 25px 25px 0 0;
@@ -128,7 +110,7 @@ body, html {
   font-weight: 700;
   color: #5c4530;
   padding: 15px 20px;
-  background: linear-gradient(to right, #f7e4d5, #eddcc8);
+  background: linear-gradient(to right, #fde5b2, #f8c471); /* ไล่ระดับสีเหลืองทอง */
   border-radius: 25px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: fit-content;
@@ -140,10 +122,11 @@ body, html {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   width: 100%;
+  padding-top: 1rem;
 }
 
 .menu-item {
-  background: linear-gradient(to bottom, #fff, #f7f1e3);
+  background: linear-gradient(to bottom, #fff, #f3e5d1); /* สีพื้นหลังไล่ระดับ */
   border-radius: 20px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -174,11 +157,11 @@ body, html {
 
 .menu-item-price {
   font-size: 1rem;
-  color: #8b6b51;
+  color: #b9770e; /* สีเหลืองทองเข้ม */
   margin-top: 5px;
 }
 
-/* Responsive Design */
+/* ===== ปรับให้รองรับ Responsive Design ===== */
 @media (max-width: 768px) {
   .menu-items {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

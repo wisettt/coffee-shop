@@ -5,10 +5,12 @@ import { faArrowLeft, faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "./Orderpage.css";
 
+const API_URL = "http://localhost:5000/api"; // ✅ ตั้งค่าให้ตรงกับ Backend
+
 const OrderPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const tableNumber = searchParams.get("table") || "1"; 
+  const tableNumber = Number(searchParams.get("table")) || 1; // ✅ แปลงเป็นตัวเลข
 
   const [items, setItems] = useState([]);
 
@@ -42,38 +44,44 @@ const OrderPage = () => {
   };
 
   const handleCheckout = async () => {
-    try {
-      const orderDetails = {
-        table: tableNumber,
-        items: items,
-        totalAmount: totalAmount,
+    if (!items || items.length === 0 || totalAmount <= 0) {
+        alert("❌ ไม่มีสินค้าในตะกร้า!");
+        return;
+    }
+
+    const orderDetails = {
+        table: Number(tableNumber),
+        items: items.map(({ id, name, price, quantity, image }) => ({
+            id, name, price, quantity, image  // ✅ ส่ง image ไปด้วย
+        })), 
+        totalAmount: parseFloat(totalAmount.toFixed(2)), 
         date: new Date().toISOString(),
-      };
+    };
 
-      console.log("✅ ออเดอร์ที่ส่งไปยัง Backend:", orderDetails);
+    console.log("📦 ออเดอร์ที่ส่งไปยัง Backend:", JSON.stringify(orderDetails, null, 2));
 
-      const response = await fetch("http://localhost:5000/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderDetails),
-      });
+    try {
+        const response = await axios.post(`${API_URL}/orders`, orderDetails, {
+            headers: { "Content-Type": "application/json" }
+        });
 
-      const data = await response.json();
-      console.log("✅ คำตอบจาก Backend:", data);
+        console.log("✅ คำตอบจาก Backend:", response.data);
+        alert("✅ สั่งซื้อสำเร็จ!");
 
-      if (data.message && data.message.includes("บันทึกออเดอร์โต๊ะที่")) {
-        localStorage.setItem(`orderDetails_table_${tableNumber}`, JSON.stringify(orderDetails));
+        // ✅ บันทึกใบเสร็จ
+        localStorage.setItem(`receipt_table_${tableNumber}`, JSON.stringify(orderDetails));
+
+        // ✅ ล้างตะกร้า
         localStorage.removeItem(`cart_table_${tableNumber}`);
         setItems([]);
+
+        // ✅ ไปที่หน้าใบเสร็จ
         navigate(`/MenuBill?table=${tableNumber}`);
-      } else {
-        alert("❌ ไม่สามารถส่งออเดอร์ได้");
-      }
     } catch (error) {
-      console.error("❌ Error sending order to database:", error);
-      alert("เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง");
+        console.error("❌ Error sending order to database:", error.response?.data || error.message);
+        alert("เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง");
     }
-  };
+};
 
   return (
     <div className="cart">
@@ -105,8 +113,8 @@ const OrderPage = () => {
               <input
                 type="number"
                 value={item.quantity}
-                onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
                 className="quantity-input"
+                readOnly
               />
               <button
                 className="quantity-button"

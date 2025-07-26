@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./MenuDetails.css";
 
+const API_URL = "http://localhost:5000"; // ✅ ใช้เป็นตัวแปรหลัก
+
 const MenuDetails = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
@@ -16,14 +18,24 @@ const MenuDetails = () => {
   useEffect(() => {
     const fetchMenuDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/menu/${id}`);
-        if (response.data.success) {
-          setMenu(response.data.data);
+        console.log("🌐 Fetching all menus from:", `${API_URL}/api/menu/public-menu`);
+        const response = await axios.get(`${API_URL}/api/menu/public-menu`);
+        
+        if (response.data.success && Array.isArray(response.data.data)) {
+          // ✅ ค้นหาเมนูที่ตรงกับ ID ที่ต้องการ
+          const selectedMenu = response.data.data.find((item) => item.id === parseInt(id));
+          
+          if (selectedMenu) {
+            setMenu(selectedMenu);
+          } else {
+            setError("ไม่พบข้อมูลเมนู");
+          }
         } else {
-          setError("ไม่พบข้อมูลเมนู");
+          setError("ไม่สามารถโหลดข้อมูลเมนูได้");
         }
       } catch (error) {
-        setError("ไม่สามารถโหลดข้อมูลเมนูได้");
+        console.error("❌ Error fetching menus:", error.response ? error.response.data : error.message);
+        setError("เกิดข้อผิดพลาดในการโหลดเมนู");
       } finally {
         setLoading(false);
       }
@@ -33,6 +45,8 @@ const MenuDetails = () => {
   }, [id]);
 
   const addToCart = () => {
+    if (!menu) return;
+
     const cart = JSON.parse(localStorage.getItem(`cart_table_${tableNumber}`)) || [];
     console.log(`🛒 กำลังเพิ่มสินค้าในโต๊ะ ${tableNumber}, ตะกร้าปัจจุบัน:`, cart);
 
@@ -71,7 +85,7 @@ const MenuDetails = () => {
       <div className="menu-details-content">
         {menu.image && (
           <img
-            src={`http://localhost:5000${menu.image}`}
+            src={`${API_URL}${menu.image}`}
             alt={menu.name}
             className="menu-details-image"
           />

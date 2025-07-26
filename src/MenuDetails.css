@@ -1,90 +1,186 @@
 .menu-details {
   font-family: 'Prompt', sans-serif;
-  background-color: #fffbea; /* พื้นหลังโทนครีม */
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
+  background: linear-gradient(145deg, #f8f8f2, #ffe4b2); /* ไล่ระดับสีโทนเหลืองอ่อน */
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  margin: 30px auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* เส้นขอบบางๆ */
 }
 
+.menu-details:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ หัวข้อเมนู */
 .menu-details-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #f0e6d6;
-  padding-bottom: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid rgba(255, 215, 128, 0.6); /* สีทอง */
 }
 
+.menu-details-header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #5c4530;
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.menu-details-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #f5a623, #f0932b); /* สีทองเข้ม */
+  border-radius: 2px;
+}
+
+/* ✅ ปุ่มย้อนกลับ */
 .menu-details-header .back-button {
-  background-color: #e5d4c0;
+  background: linear-gradient(145deg, #f8c471, #f39c12); /* สีเหลืองทอง */
   border: none;
   color: #5c4530;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-details-header .back-button:hover {
-  transform: scale(1.1);
-  background-color: #d3b89b; /* สี hover */
+  transform: scale(1.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* ✅ เนื้อหาเมนู */
 .menu-details-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* ✅ รูปภาพเมนู */
 .menu-details-image {
   max-width: 100%;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+.menu-details-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-details-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+.menu-details-image:hover::before {
+  opacity: 1;
+}
+
+/* ✅ ข้อมูลเมนู */
 .menu-details-info {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   line-height: 1.6;
+  background: rgba(255, 248, 230, 0.95);
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* เพิ่มความเบลอให้พื้นหลัง */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* เส้นขอบบางๆ */
 }
 
 .menu-details-info p {
-  font-size: 18px;
+  font-size: 22px;
   color: #4a302a;
-  margin: 8px 0;
+  margin: 15px 0;
 }
 
+.menu-details-info strong {
+  color: #b9770e; /* สีเหลืองทองเข้ม */
+  font-weight: bold;
+}
+
+/* ✅ ปุ่มเพิ่มลงตะกร้า */
 .add-to-cart-button {
-  background-color: #a07855;
+  background: linear-gradient(145deg, #e67e22, #d35400); /* สีส้มทอง */
   color: white;
   border: none;
-  padding: 12px 25px;
-  font-size: 18px;
+  padding: 20px 50px;
+  font-size: 24px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 15px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-to-cart-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease;
 }
 
 .add-to-cart-button:hover {
-  background-color: #8b5e3c;
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
+.add-to-cart-button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ✅ การโหลดและข้อผิดพลาด */
 .menu-details-loading,
 .menu-details-error {
-  font-size: 20px;
-  color: #8b5e3c;
+  font-size: 26px;
+  color: #d35400; /* สีส้มทองเข้ม */
   text-align: center;
-  margin: 20px;
+  margin: 50px;
+  padding: 30px;
+  background: rgba(255, 248, 230, 0.95);
+  border-radius: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* เพิ่มความเบลอให้พื้นหลัง */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* เส้นขอบบางๆ */
 }

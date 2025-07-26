@@ -6,73 +6,63 @@ import "./MenuBill.css";
 
 const MenuBill = () => {
   const [searchParams] = useSearchParams();
-  const tableNumber = searchParams.get("table") || "1"; // ✅ ดึงหมายเลขโต๊ะจาก URL
+  const tableNumber = searchParams.get("table") || "1";
   const [orderDetails, setOrderDetails] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(`🔍 กำลังโหลดใบเสร็จสำหรับโต๊ะที่ ${tableNumber}...`);
 
-    // ✅ ตรวจสอบข้อมูลออเดอร์จาก localStorage ก่อน
-    const localOrder = JSON.parse(localStorage.getItem(`orderDetails_table_${tableNumber}`));
-    if (localOrder) {
-      console.log("📦 โหลดออเดอร์จาก localStorage:", localOrder);
-      setOrderDetails(localOrder);
-      return; // ✅ ถ้ามีข้อมูลแล้ว ไม่ต้องโหลดจาก Backend
-    }
-
-    // ✅ โหลดออเดอร์จาก Backend ถ้าไม่มีข้อมูลใน localStorage
-    const fetchOrders = async () => {
+    const savedReceipt = localStorage.getItem(`receipt_table_${tableNumber}`);
+    
+    if (savedReceipt) {
       try {
-        const response = await fetch(`http://localhost:5000/orders?table=${tableNumber}`);
-        if (!response.ok) {
-          throw new Error("ไม่สามารถดึงข้อมูลคำสั่งซื้อได้");
-        }
-        const data = await response.json();
+        const parsedReceipt = JSON.parse(savedReceipt);
+        console.log("📦 โหลดใบเสร็จจาก localStorage:", parsedReceipt);
 
-        console.log("✅ ออเดอร์ที่ได้รับจาก Backend:", data);
-
-        if (data.length > 0) {
-          setOrderDetails(data[0]); // ✅ ใช้ออเดอร์แรก
-        } else {
+        if (
+          !parsedReceipt || 
+          !Array.isArray(parsedReceipt.items) || 
+          (typeof parsedReceipt.total_amount === "undefined" && typeof parsedReceipt.totalAmount === "undefined")
+        ) {
+          console.error("❌ โครงสร้างข้อมูลใบเสร็จไม่ถูกต้อง", parsedReceipt);
           setOrderDetails(null);
+        } else {
+          setOrderDetails(parsedReceipt);
         }
       } catch (error) {
-        console.error("❌ Error fetching orders:", error);
-        alert("ไม่สามารถดึงข้อมูลคำสั่งซื้อจากเซิร์ฟเวอร์");
+        console.error("❌ ข้อมูลใบเสร็จเสียหาย:", error);
+        setOrderDetails(null);
       }
-    };
-
-    fetchOrders();
+    } else {
+      setOrderDetails(null);
+    }
   }, [tableNumber]);
 
-  const handleOrderReceived = async () => {
-    console.log(`✅ โต๊ะที่ ${tableNumber}: รับเมนูเรียบร้อยแล้ว!`);
-    
-    try {
-      // ส่งคำขอไปอัปเดตสถานะในฐานข้อมูล
-      const response = await fetch(`http://localhost:5000/orders/${orderDetails.id}/received`, {
-        method: 'POST',
-      });
-      if (response.ok) {
-        alert(`โต๊ะที่ ${tableNumber}: รับเมนูเรียบร้อยแล้ว!`);
-        // อัปเดตสถานะหลังจากรับเมนู
-        setOrderDetails(prevOrder => ({
-          ...prevOrder,
-          status: 'received',
-        }));
-      } else {
-        alert('❌ ไม่สามารถอัปเดตสถานะการรับเมนู');
-      }
-    } catch (error) {
-      console.error("❌ Error updating order status:", error);
-      alert("ไม่สามารถอัปเดตสถานะการรับเมนู");
-    }
-  };
-
+  // 🔥 เช็กสถานะโต๊ะจาก API ถ้าเป็น "paid" ให้ลบใบเสร็จ
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/tables/${tableNumber}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`❌ ไม่พบโต๊ะที่ ${tableNumber}`);
+        return res.json();
+      })
+      .then(data => {
+        if (data.status === "paid") {
+          console.log(`🧾 โต๊ะที่ ${tableNumber} ชำระเงินแล้ว, ซ่อนบิล...`);
+          
+          // ✅ ลบข้อมูลบิลจาก LocalStorage
+          localStorage.removeItem(`receipt_table_${tableNumber}`);
+  
+          // ✅ ซ่อนบิลทั้งหมด
+          setOrderDetails(null);
+        }
+      })
+      .catch(err => console.error("❌ ไม่สามารถตรวจสอบสถานะโต๊ะ:", err.message));
+  }, [tableNumber]);
+  
+  
   return (
     <div className="menu-bill">
-      {/* ปุ่มย้อนกลับ */}
       <button className="back-button" onClick={() => navigate(`/coffee-shop?table=${tableNumber}`)}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
@@ -81,30 +71,33 @@ const MenuBill = () => {
 
       {orderDetails ? (
         <div className="bill-items">
-          {orderDetails.items.map((item, index) => (
-            <div key={index} className="bill-item">
-              <span className="item-name">{item.name}</span>
-              <span className="item-quantity">x {item.quantity}</span>
-              <span className="item-price">{(item.price * item.quantity).toFixed(2)}฿</span>
-            </div>
-          ))}
+          {Array.isArray(orderDetails.items) && orderDetails.items.length > 0 ? (
+            orderDetails.items.map((item, index) => (
+              <div key={index} className="bill-item">
+                <span className="item-name">{item.name}</span>
+                <span className="item-quantity">x {item.quantity}</span>
+                <span className="item-price">{(item.price * item.quantity).toFixed(2)}฿</span>
+              </div>
+            ))
+          ) : (
+            <p>❌ ไม่มีรายการสินค้า</p>
+          )}
+          
           <div className="bill-total">
             <span>รวมทั้งหมด</span>
-            <span>{orderDetails.totalAmount.toFixed(2)}฿</span>
+            <span>
+              {orderDetails?.total_amount || orderDetails?.totalAmount 
+                ? Number(orderDetails.total_amount || orderDetails.totalAmount).toFixed(2) 
+                : "0.00"}฿
+            </span>
           </div>
-          <p className="order-date">📅 วันที่: {new Date(orderDetails.date).toLocaleString()}</p>
+
+          {orderDetails?.date && (
+            <p className="order-date">📅 วันที่: {new Date(orderDetails.date).toLocaleString()}</p>
+          )}
         </div>
       ) : (
         <p>❌ ไม่มีคำสั่งซื้อสำหรับโต๊ะที่ {tableNumber}</p>
-      )}
-
-      {/* ปุ่มสำหรับการจัดการ */}
-      {orderDetails?.items.length > 0 && (
-        <div className="button-group">
-          <button className="action-button" onClick={handleOrderReceived}>
-            ✅ รับเมนูแล้ว
-          </button>
-        </div>
       )}
     </div>
   );

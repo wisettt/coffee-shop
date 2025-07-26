@@ -1,8 +1,24 @@
-/* ✅ ปรับขนาดของตะกร้าให้พอดี */
+/* ===== รีเซ็ตค่าเริ่มต้น ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Prompt', sans-serif;
+  background-color: #fdf3e6;
+  color: #4a302a;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* ===== ปรับขนาดของตะกร้าให้พอดี ===== */
 .cart {
   width: 90%;
   max-width: 420px;
-  background-color: #fff8e6;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -12,10 +28,10 @@
   flex-direction: column;
 }
 
-/* ✅ หัวข้อใหญ่ขึ้น และชัดขึ้น */
+/* ===== หัวข้อใหญ่ขึ้น และชัดขึ้น ===== */
 .cart-header {
   margin-bottom: 15px;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   color: #5c4530;
   text-align: center;
@@ -32,10 +48,10 @@
   position: relative;
 }
 
-/* ✅ รูปสินค้าชัดขึ้น แต่ไม่กินที่เกินไป */
+/* ===== รูปสินค้าชัดขึ้น แต่ไม่กินที่เกินไป ===== */
 .item-image {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 10px;
   margin-right: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -56,7 +72,7 @@
 }
 
 .item-name {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: bold;
   color: #4a302a;
   margin-bottom: 3px;
@@ -65,18 +81,18 @@
 .item-price {
   font-size: 16px;
   font-weight: bold;
-  color: #8b6b51;
+  color: #b9770e; /* สีเหลืองทองเข้ม */
 }
 
-/* ✅ ปรับขนาดปุ่มลบ ❌ ให้เล็กลง แต่ยังคลิกง่าย */
+/* ===== ปรับขนาดปุ่มลบ ❌ ให้เล็กลง แต่ยังคลิกง่าย ===== */
 .remove-button {
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(145deg, #ff7b7b, #e85a5a);
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(145deg, #ff8b8b, #e85757);
   border: none;
   border-radius: 50%;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -87,11 +103,11 @@
 }
 
 .remove-button:hover {
-  background: linear-gradient(145deg, #ff5c5c, #e63939);
+  background: linear-gradient(145deg, #ff6b6b, #e63535);
   transform: scale(1.1);
 }
 
-/* ✅ ปรับขนาดปุ่ม + - และตัวเลข ให้ดูดีขึ้น */
+/* ===== ปรับขนาดปุ่ม + - และตัวเลข ให้ดูดีขึ้น ===== */
 .quantity {
   display: flex;
   align-items: center;
@@ -116,7 +132,7 @@
   transform: scale(1.1);
 }
 
-/* ✅ ช่องตัวเลขเล็กลง แต่ดูเรียบร้อย */
+/* ===== ช่องตัวเลขเล็กลง แต่ดูเรียบร้อย ===== */
 .quantity-input {
   width: 45px;
   height: 35px;
@@ -125,7 +141,7 @@
   color: #5c4530;
   border: 2px solid #e0c3a2;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #ffffff;
   transition: box-shadow 0.3s ease;
 }
 
@@ -133,7 +149,7 @@
   box-shadow: 0 0 5px rgba(240, 173, 78, 0.7);
 }
 
-/* ✅ สรุปยอดรวมใหญ่ขึ้น ดูเด่นขึ้น */
+/* ===== สรุปยอดรวมใหญ่ขึ้น ดูเด่นขึ้น ===== */
 .cart-footer {
   margin-top: 15px;
   padding-top: 10px;
@@ -150,12 +166,12 @@
   margin-bottom: 12px;
 }
 
-/* ✅ ปุ่มสั่งซื้อกว้างขึ้น ดูโดดเด่น */
+/* ===== ปุ่มสั่งซื้อกว้างขึ้น ดูโดดเด่น ===== */
 .checkout-button {
   width: 100%;
   padding: 12px;
-  background-color: #a07855;
-  color: #fff;
+  background-color: #b9770e;
+  color: #ffffff;
   font-size: 18px;
   font-weight: bold;
   border: none;
@@ -168,4 +184,29 @@
 .checkout-button:hover {
   background-color: #8b5e3c;
   transform: translateY(-2px);
+}
+
+/* ===== ปุ่มย้อนกลับ ===== */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(145deg, #ffd700, #ffa500);
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
